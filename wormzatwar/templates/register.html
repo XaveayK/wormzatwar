@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        form {
+            position: absolute;
+            top:40%;
+            left:40%;
+            margin: -2.5% 0 0 -7.5%;
+        }
+    </style>
+    <body>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Create Account">
+            <a href="/" type="button" class="button">
+                Login
+            </a>
+        </form>
+    </body>
+</html>
