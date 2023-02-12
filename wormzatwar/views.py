@@ -4,16 +4,14 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from .models import Lobby, WormUser
 
-import os
-
 def gameLobby(request, lobbyID):
     
     lobby = Lobby.objects.get(lobbyPK=lobbyID)
-    if lobby.wormuser_set.filter(pk = request.user.id).exists():
-        return render(request, 'lobby.html', {'LobbyPK':lobbyID, 'Users':lobby.wormuser_set.all()})
+    if lobby.wormuser.filter(pk = request.user.id).exists():
+        return render(request, 'lobby.html', {'LobbyPK':lobbyID, 'Users':lobby.wormuser.all()})
     else:
-        lobby.wormuser_set.add(WormUser.objects.get(pk = request.user.id))
-        return render(request, 'lobby.html')
+        lobby.wormuser.add(WormUser.objects.get(pk = request.user.id))
+        return render(request, 'lobby.html', {'LobbyPK':lobbyID, 'Users':lobby.wormuser.all()})
 
 def lobbyChoose(request):
     return render(request, 'selectLobby.html', {'Lobbys':Lobby.objects.all()})
@@ -41,11 +39,11 @@ def loginPageLoad(request):
         return render(request, 'login.html', {'form':AuthenticationForm()})
 
 def newLobby(request):
-    lobby = Lobby()
-    lobby.save()
     user = WormUser.objects.get(id = request.user.id)
-    lobby.wormuser_set.add(user)
-    return render(request, 'lobby.html', {'Players':lobby})
+    lobby = Lobby(owner=user)
+    lobby.save()
+    lobby.wormuser.add(user)
+    return redirect('game', lobby.lobbyPK)
 
 def signout(request):
     logout(request)
@@ -72,4 +70,5 @@ def signup(request):
 def stateInfo(request, lobbyID, stateID):
     print(lobbyID)
     print(stateID)
+    print(request.user)
     return HttpResponse(request, "You did it!")

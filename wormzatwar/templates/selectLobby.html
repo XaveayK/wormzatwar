@@ -1,54 +1,24 @@
 <!DOCTYPE html>
 <html>
-    <style>
-        #inLobbyList {
-            all:unset;
-            background-color: aquamarine;
-            display: table;
-            margin-right: auto;
-            margin-left: auto;
-        }
-        #inLobbyList:focus {
-            outline: 1px solid darkblue;
-        }
-
-        #newLobby {
-            all: unset;
-            background-color: aquamarine;
-            padding: 5px 10px;
-            border-radius: 4px;
-            position: absolute;
-            top:0%;
-            left:0%;
-        }
-        #newLobby:focus {
-            outline: 1px solid black;
-        }
-        
-        #signout {
-            all: unset;
-            background-color:aquamarine;
-            padding: 5px 10px;
-            border-radius: 4px;
-            position: absolute;
-            top: 0%;
-            right: 0%;
-        }
-        #signout:focus {
-            outline: 1px solid darkblue;
-        }
-    </style>
+    
     <head>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'style.css' %}">
         <a id="signout" href="/signout/" type="button" method="POST">Signout</a>
         <a id="newLobby" href="/newlobby/" type="button">New Lobby</a>
     </head>
     <body>
-        <div id="inLobbyList">
+        <ul id="inLobbyList">
+            <li>
+                <p>Lobbies:</p>
+            </li>
         {% for Lobby in Lobbys %}
+            <li>
             <a href="/game/{{ Lobby.lobbyPK }}">
                 {{ Lobby.lobbyPK }}
             </a>
+            </li>
         {% endfor %}
-        </div>
+        </ul>
     </body>
 </html>

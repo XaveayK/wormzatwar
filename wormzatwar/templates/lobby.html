@@ -1,26 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <style>
-    #userList {
-      all:unset;
-      display: table;
-      margin-right: auto;
-      margin-left: auto;
-    }
-    .title {
-      margin-right: auto;
-      margin-left: auto;
-    }
-  </style>
   <head>
     {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>Wormz At War</title>
     <script type="text/javascript" src="{% static 'mapdata.js' %}"></script>
     <script type="text/javascript" src="{% static 'worldmap.js' %}"></script>
   </head>
   <body>
-    <h1>WORMZ AT WAR</h1>
+    <h1 id="Title-Card">WORMZ AT WAR</h1>
     <h2>Lobby ID: {{ LobbyPK }}</h2>
     <div id="map"></div>
     <div id="userList">

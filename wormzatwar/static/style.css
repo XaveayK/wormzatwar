@@ -1,0 +1,75 @@
+#userList {
+  all:unset;
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+h1, h2 {
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+form {
+  position: absolute;
+  top:50%;
+  left:50%;
+  margin: -2.5% 0 0 -7.5%;
+}
+
+#inLobbyList {
+  all:unset;
+  margin-right: auto;
+  margin-left:auto;
+  display:table;
+  align-content: center;
+  outline: black;
+}
+
+li {
+  all: unset;
+  display: block;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2px;
+}
+
+#newLobby {
+  all: unset;
+  background-color: aquamarine;
+  padding: 5px 10px;
+  border-radius: 4px;
+  position: absolute;
+  top:0%;
+  left:0%;
+}
+#newLobby:focus {
+  outline: 1px solid black;
+}
+
+#signout {
+  all: unset;
+  background-color:aquamarine;
+  padding: 5px 10px;
+  border-radius: 4px;
+  position: absolute;
+  top: 0%;
+  right: 0%;
+}
+#signout:focus {
+  outline: 1px solid darkblue;
+}
+
+li a {
+  text-decoration: none;
+  color: black;
+  display: block;
+}
+
+li a:hover {
+  text-decoration: none;
+  color: #000000;
+  background-color: #33B5E5;
+}
