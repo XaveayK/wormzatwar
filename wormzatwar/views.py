@@ -3,9 +3,9 @@ from .forms import newUserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from .models import Lobby, WormUser
+from .helpers import gameStage
 
 def gameLobby(request, lobbyID):
-    
     lobby = Lobby.objects.get(lobbyPK=lobbyID)
     if lobby.wormuser.filter(pk = request.user.id).exists():
         return render(request, 'lobby.html', {'LobbyPK':lobbyID, 'Users':lobby.wormuser.all()})
@@ -41,6 +41,7 @@ def loginPageLoad(request):
 def newLobby(request):
     user = WormUser.objects.get(id = request.user.id)
     lobby = Lobby(owner=user)
+
     lobby.save()
     lobby.wormuser.add(user)
     return redirect('game', lobby.lobbyPK)
@@ -68,6 +69,9 @@ def signup(request):
         return render(request, 'register.html', {'form':newUserForm()})
 
 def stateInfo(request, lobbyID, stateID):
+
+    
+
     print(lobbyID)
     print(stateID)
     print(request.user)

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.crypto import get_random_string
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 class WormUser(AbstractUser):
     username = models.CharField(max_length=50, unique=True, null=False)
@@ -11,6 +12,7 @@ class country():
     occupier = models.ForeignKey(WormUser, on_delete=models.SET_NULL, null=True, default=None, related_name='users')
     gucci = models.IntegerField()
     food = models.IntegerField()
+    occupyingForce = models.IntegerField()
 
 class Lobby(models.Model):
 
@@ -20,10 +22,15 @@ class Lobby(models.Model):
         editable=False,
         unique=True)
 
+    stage = models.IntegerField(
+        default=1,
+        validators=[MaxValueValidator(4), MinValueValidator(1)]
+    )
+
     def save(self, *args, **kwargs):
         if not self.lobbyPK:
             self.lobbyPK = get_random_string(6)
         return super(Lobby, self).save(*args, **kwargs)
-    
+
     wormuser = models.ManyToManyField(WormUser)
     owner = models.ForeignKey(WormUser, on_delete=models.CASCADE, null=False, default=None, related_name='owner')
