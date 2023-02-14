@@ -3,7 +3,7 @@ from .forms import newUserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from .models import Lobby, WormUser
-from .helpers import gameStage
+from .helpers import gameStage, acrToCountries, countriesToAcr
 
 def gameLobby(request, lobbyID):
     lobby = Lobby.objects.get(lobbyPK=lobbyID)
@@ -69,10 +69,5 @@ def signup(request):
         return render(request, 'register.html', {'form':newUserForm()})
 
 def stateInfo(request, lobbyID, stateID):
-
     
-
-    print(lobbyID)
-    print(stateID)
-    print(request.user)
-    return HttpResponse(request, "You did it!")
+    return HttpResponse(countriesToAcr[stateID], content_type="text/plain")
