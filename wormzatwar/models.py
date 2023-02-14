@@ -36,16 +36,16 @@ class country(models.Model):
     food = models.IntegerField()
     occupyingForce = models.IntegerField()
     troopGen = models.IntegerField()
+    color = models.CharField(max_length=10, null=True)
     lobby = models.ForeignKey(Lobby, on_delete=models.CASCADE, null=False)
 
 class userInLobby(models.Model):
-    user = models.ForeignKey(WormUser, on_delete=models.CASCADE)
-    lobby = models.ForeignKey(Lobby, on_delete=models.CASCADE)
 
     class Colors(models.TextChoices):
         RED = '1', _('Red')
         BLUE = '2', _('Blue')
         GREEN = '3', _('Green')
 
-
+    user = models.ForeignKey(WormUser, on_delete=models.CASCADE)
+    lobby = models.ForeignKey(Lobby, on_delete=models.CASCADE)
     color = models.CharField(choices=Colors.choices, max_length=10)

@@ -2,16 +2,26 @@ from django.shortcuts import render, redirect, HttpResponse
 from .forms import newUserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Lobby, WormUser
+from .models import Lobby, WormUser, userInLobby, country
 from .helpers import gameStage, acrToCountries, countriesToAcr
 
 def gameLobby(request, lobbyID):
     lobby = Lobby.objects.get(lobbyPK=lobbyID)
     if lobby.wormuser.filter(pk = request.user.id).exists():
-        return render(request, 'lobby.html', {'LobbyPK':lobbyID, 'Users':lobby.wormuser.all()})
+        return render(request, 'lobby.html', 
+            {   
+                'LobbyPK':lobbyID, 
+                'Users':lobby.wormuser.all(),
+                'Colors':userInLobby.Colors.labels
+            })
     else:
         lobby.wormuser.add(WormUser.objects.get(pk = request.user.id))
-        return render(request, 'lobby.html', {'LobbyPK':lobbyID, 'Users':lobby.wormuser.all()})
+        return render(request, 'lobby.html', 
+            {
+                'LobbyPK':lobbyID, 
+                'Users':lobby.wormuser.all(), 
+                'Colors':userInLobby.Colors.labels
+            })
 
 def lobbyChoose(request):
     return render(request, 'selectLobby.html', {'Lobbys':Lobby.objects.all()})
@@ -41,9 +51,8 @@ def loginPageLoad(request):
 def newLobby(request):
     user = WormUser.objects.get(id = request.user.id)
     lobby = Lobby(owner=user)
-
     lobby.save()
-    lobby.wormuser.add(user)
+    lobby.wormuser.add(user, through_defaults={'color':'Red'})
     return redirect('game', lobby.lobbyPK)
 
 def signout(request):
@@ -68,6 +77,17 @@ def signup(request):
     else:
         return render(request, 'register.html', {'form':newUserForm()})
 
-def stateInfo(request, lobbyID, stateID):
-    
+def selectColorUser(request, lobbyID, color):
+    userInLobby.objects.filter(
+        user = request.user.id,
+        lobby = lobbyID
+    ).update(color=color)
+    return HttpResponse("Yellow", content_type="text/plain")
+
+#"sm_state sm_state_(acronym)"
+def stateUpdate(request, lobbyID, stateID):
+    userColor = userInLobby.objects.get(
+        user = request.user.id,
+        lobby = lobbyID
+    ).color
     return HttpResponse(countriesToAcr[stateID], content_type="text/plain")

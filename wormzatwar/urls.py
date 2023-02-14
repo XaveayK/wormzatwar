@@ -25,5 +25,6 @@ urlpatterns = [
     path('signout/', views.signout, name='signout'),
     path('newlobby/', views.newLobby, name='newLobby'),
     path('game/<str:lobbyID>', views.gameLobby, name="game"),
-    path('game/<str:lobbyID>/<str:stateID>', views.stateInfo, name='state'),
+    path('game/<str:lobbyID>/<str:stateID>', views.stateUpdate, name='state'),
+    path('game/<str:lobbyID>/color/<str:color>', views.selectColorUser, name='color'),
 ]

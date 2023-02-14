@@ -8,6 +8,7 @@
     <script type="text/javascript">var csrftoken = '{{ csrf_token }}';</script>
     <script type="text/javascript" src="{% static 'mapdata.js' %}"></script>
     <script type="text/javascript" src="{% static 'worldmap.js' %}"></script>
+    <script type="text/javascript" src="{% static 'mapInteraction.js' %}"></script>
   </head>
   <body>
     <h1 id="Title-Card">WORMZ AT WAR</h1>
@@ -17,6 +18,17 @@
       {% for User in Users %}
           <p> {{ User.username }} </p>
       {% endfor %}
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Select a Color</button>
+      <div class="dropdown-content">
+        {% for color in Colors %}
+          <a href="#" onclick="selectColor(this);event.preventDefault();" style="background-color: {{color}};">{{ color }}</a>
+        {% endfor %}
       </div>
+    </div> 
 	</body>
+  <script type="text/javascript">
+
+  </script>
 </html>
