@@ -1,8 +1,60 @@
 #userList {
   all:unset;
   display: table;
-  margin-right: auto;
-  margin-left: auto;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width:50%;
+}
+
+#countryList {
+  float: left;
+  width: 25%;
+  top: 50%;
+  left: 0%;
+  outline-style: solid;
+  outline-color: red;
+}
+
+#start {
+  position: relative;
+  width: 25%;
+  top: 50%;
+  float:right;
+  transform: translate(0%, -250%);
+}
+
+#start button {
+  float:right;
+}
+
+#Rules {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#hideRules {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#Overlap {
+  position: absolute;
+  text-align: center;
+  width:70%;
+  height:50%;
+  top:25%;
+  left:15%;
+  bottom:25%;
+  right:15%;
+  z-index: 10;
+  outline: solid;
+  outline-color: black;
+  background-color: black;
+  color: white;
 }
 
 h1, h2 {

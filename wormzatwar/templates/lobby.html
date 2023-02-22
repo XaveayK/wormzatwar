@@ -10,15 +10,31 @@
     <script type="text/javascript" src="{% static 'worldmap.js' %}"></script>
     <script type="text/javascript" src="{% static 'mapInteraction.js' %}"></script>
   </head>
-  <body>
+  <body onload="bootOperations()">
     <h1 id="Title-Card">WORMZ AT WAR</h1>
-    <h2>Lobby ID: {{ LobbyPK }}</h2>
+    <h2 id="lobbyPK" value="{{LobbyPK}}">Lobby ID: {{ LobbyPK }}</h2>
+    <div id="Rules">
+      <button onclick="displayRules()">Rules</button>
+    </div>
+    <div id="Overlap" style="display:none;">
+      <button id="hideRules" onclick="hideRules()">Close</button>
+      <p>Rules</p>
+      <p id="ruleText" style="height:80%;width:100%;top:20%;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+      </p>
+    </div>
     <div id="map"></div>
+    <div id="countryList">
+      <p>{{ CurrUser }}</p>
+    </div>
     <div id="userList">
       {% for User in Users %}
-          <p> {{ User.username }} </p>
+        <p onmouseenter="getUserForDisplay(this)"> {{ User.username }} </p>
       {% endfor %}
     </div>
+    <div id="start">
+      <button onclick="startGame()">Start</button>
+    </div>
+    <!--
     <div class="dropdown">
       <button class="dropbtn">Select a Color</button>
       <div class="dropdown-content">
@@ -26,7 +42,7 @@
           <a href="#" onclick="selectColor(this);event.preventDefault();" style="background-color: {{color}};">{{ color }}</a>
         {% endfor %}
       </div>
-    </div> 
+    </div> -->
 	</body>
   <script type="text/javascript">
 

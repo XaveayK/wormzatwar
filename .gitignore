@@ -1,0 +1,8 @@
+static/newText.txt
+db.sqlite3
+wormzatwar/commands.sql
+wormzatwar/__pycache__/helpers.cpython-310.pyc
+wormzatwar/__pycache__/models.cpython-310.pyc
+wormzatwar/__pycache__/settings.cpython-310.pyc
+wormzatwar/__pycache__/urls.cpython-310.pyc
+wormzatwar/__pycache__/views.cpython-310.pyc
